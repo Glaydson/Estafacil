@@ -1,0 +1,12 @@
+package persistencia;
+
+/**
+ * DAO para acesso aos dados de Usuario
+ * @author adfor.glaydson
+ *
+ */
+public class UsuarioDAO {
+	
+	
+
+}

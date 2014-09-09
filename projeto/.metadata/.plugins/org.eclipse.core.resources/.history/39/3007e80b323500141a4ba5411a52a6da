@@ -1,0 +1,95 @@
+package estafacil.persistencia;
+
+import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import estafacil.negocio.Usuario;
+
+/**
+ * DAO para acesso aos dados de Usuario
+ * 
+ * @author adfor.glaydson
+ *
+ */
+public class UsuarioDAO {
+
+	private static final String BRANCO = "";
+	// conexão com o banco
+	private static Connection conexao = FabricaDeConexao.obterConexao();
+
+	public static List<Usuario> obterUsuarios() {
+		try {
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			Usuario usuario = null;
+			PreparedStatement stmt = conexao
+					.prepareStatement("select * from usuarios");
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				usuario = new Usuario();
+				usuario.setIdUsuario(rs.getInt("idusuario"));
+				usuario.setLogin(rs.getString("login"));
+				usuario.setTipoUsuario(rs.getString("tipousuario"));
+				usuarios.add(usuario);
+			}
+			rs.close();
+			stmt.close();
+			return usuarios;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+
+	public static void adicionar(Usuario usuario) throws Exception {
+		validarCampos(usuario);
+		String senhaCripto = obterSenhaCripto(usuario.getSenha());
+
+	}
+
+	/**
+	 * Criptografa a senha do usuário para armazenamento no BD
+	 * 
+	 * @param senha
+	 *            Senha a ser criptografada
+	 * @return Senha criptografada
+	 */
+	private static String obterSenhaCripto(String senha) {
+		MessageDigest algoritmo;
+		String senhaCripto = null;
+		try {
+			algoritmo = MessageDigest.getInstance("SHA-256");
+			byte messageDigest[] = algoritmo.digest(senha.getBytes("UTF-8"));
+			StringBuilder hexString = new StringBuilder();
+			for (byte b : messageDigest) {
+				hexString.append(String.format("%02X", 0xFF & b));
+			}
+			senhaCripto = hexString.toString();
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
+		return senhaCripto;
+	}
+
+	private static void validarCampos(Usuario usuario) throws Exception {
+		if (usuario != null) {
+			List<String> erros = new ArrayList<String>();
+			if (usuario.getLogin() == null || usuario.getLogin().equals(BRANCO)) {
+				erros.add("Login inválido ou não preenchido.");
+			} 
+			if (usuario.getSenha() == null || usuario.getSenha().equals(BRANCO)) {
+				erros.add("Senha inválida ou não preenchida.");
+			}
+		} else {
+			throw new Exception("Usuário inválido.");
+		}
+
+	}
+}

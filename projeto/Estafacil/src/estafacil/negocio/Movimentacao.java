@@ -1,0 +1,53 @@
+package estafacil.negocio;
+
+import java.util.Date;
+
+public class Movimentacao {
+
+	private int idMovimentacao;
+	private Date data;
+	private String hora;
+	private TipoMovimentacao tipoMovimentacao;
+	private Veiculo veiculo;
+
+	public int getIdMovimentacao() {
+		return idMovimentacao;
+	}
+
+	public void setIdMovimentacao(int idMovimentacao) {
+		this.idMovimentacao = idMovimentacao;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
+	}
+
+	public String getHora() {
+		return hora;
+	}
+
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+
+	public TipoMovimentacao getTipoMovimentacao() {
+		return tipoMovimentacao;
+	}
+
+	public void setTipoMovimentacao(TipoMovimentacao tipoMovimentacao) {
+		this.tipoMovimentacao = tipoMovimentacao;
+	}
+
+	public Veiculo getVeiculo() {
+		return veiculo;
+	}
+
+	public void setVeiculo(Veiculo veiculo) {
+		this.veiculo = veiculo;
+	}
+
+}

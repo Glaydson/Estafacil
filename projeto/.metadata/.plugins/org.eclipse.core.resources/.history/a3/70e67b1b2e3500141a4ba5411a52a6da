@@ -1,0 +1,23 @@
+package estafacil.persistencia;
+
+import java.sql.Connection;
+import java.util.List;
+
+import estafacil.negocio.Usuario;
+
+/**
+ * DAO para acesso aos dados de Usuario
+ * 
+ * @author adfor.glaydson
+ *
+ */
+public class UsuarioDAO {
+
+	// conexão com o banco
+	private static Connection conexao = FabricaDeConexao.obterConexao();
+	
+	public static List<Usuario> obterUsuarios() {
+		
+	}
+
+}

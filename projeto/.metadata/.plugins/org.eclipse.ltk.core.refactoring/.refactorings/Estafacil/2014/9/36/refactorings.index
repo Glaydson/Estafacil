@@ -1,0 +1,9 @@
+1409767923596	Encapsulate field 'idTipoMovimentacao'
+1409768768462	Rename type 'TipoVeiculo'
+1409768776409	Encapsulate field 'idTipoTarifaVeiculo'
+1409768811275	Delete element
+1409942994640	Rename package 'negocio'
+1409943005895	Rename package 'persistencia'
+1409943017613	Rename package 'testes'
+1409945595021	Rename local variable 'usuario1'
+1409945783128	Rename local variable 'funcionario1'

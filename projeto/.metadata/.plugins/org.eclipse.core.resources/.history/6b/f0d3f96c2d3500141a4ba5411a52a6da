@@ -1,0 +1,17 @@
+package negocio;
+
+public enum TipoMovimentacao {
+
+	ENTRADA, SAIDA;
+
+	private int idTipoMovimentacao;
+
+	public int getIdTipoMovimentacao() {
+		return idTipoMovimentacao;
+	}
+
+	public void setIdTipoMovimentacao(int idTipoMovimentacao) {
+		this.idTipoMovimentacao = idTipoMovimentacao;
+	}
+
+}

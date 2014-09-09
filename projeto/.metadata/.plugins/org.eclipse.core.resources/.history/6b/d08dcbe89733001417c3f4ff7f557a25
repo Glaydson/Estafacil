@@ -1,0 +1,29 @@
+package testes;
+
+import negocio.TarifaHora;
+import negocio.TipoTarifaVeiculo;
+
+public class TesteDefineTarifas {
+
+	public static void main(String[] args) {
+		TarifaHora tarifa1 = new TarifaHora();
+		tarifa1.setValor(5.0);
+		TipoTarifaVeiculo.GRANDE.setTarifa(tarifa1);
+
+		TarifaHora tarifa2 = new TarifaHora();
+		tarifa2.setValor(4.0);
+		TipoTarifaVeiculo.PEQUENO.setTarifa(tarifa2);
+
+		TarifaHora tarifa3 = new TarifaHora();
+		tarifa3.setValor(3.0);
+		TipoTarifaVeiculo.MOTO.setTarifa(tarifa3);
+
+		TipoTarifaVeiculo[] tipos = TipoTarifaVeiculo.values();
+		for (TipoTarifaVeiculo t : tipos) {
+			System.out.print(t.name() + " - ");
+			System.out.println(t.getTarifa().getValor());
+		}
+
+	}
+
+}
